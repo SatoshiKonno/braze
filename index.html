@@ -106,7 +106,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main>
 
 <section>
-
+<div id="global-banner-container" style="width: 100%; height: 450px;"></div>
 <h2>今の季節に人気の観光地<span class="small">Popular tourist destinations for this season</span></h2>
 
 <div class="list-grid1">
@@ -349,5 +349,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!--このテンプレート専用のスクリプト-->
 <script src="js/main.js"></script>
 
+<!--スクリプト-->
+<script>
+braze.subscribeToBannersUpdates((banners) => {
+    // get this placement's banner. If it's `null` the user did not qualify for one.
+    const globalBanner = braze.getBanner("topads");
+    if (!globalBanner) {
+        return;
+    }
+	
+    // choose where in the DOM you want to insert the banner HTML
+    const container = document.getElementById("global-banner-container");
+
+    // Insert the banner which replacees the innerHTML of that container
+    braze.insertBanner(globalBanner, container);
+
+    // Special handling if the user is part of a Control Variant
+    if (globalBanner.isControl) {
+        // hide or collapse the container
+        container.style.display = 'none';
+    }
+});
+
+braze.requestBannersRefresh(["topads", "navigation_square_banner"])
+</script>
+	
 </body>
 </html>
