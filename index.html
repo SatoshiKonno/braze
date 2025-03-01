@@ -350,8 +350,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="js/main.js"></script>
 
 <!--Banner Cardsテンプレート-->
+<script type="module">import * as braze from "@braze/web-sdk";</script>
 <script>
-import * as braze from "@braze/web-sdk";
 braze.subscribeToBannersUpdates((banners) => {
     // get this placement's banner. If it's `null` the user did not qualify for one.
     const globalBanner = braze.getBanner("topads");
